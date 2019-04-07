@@ -1,5 +1,3 @@
-library(gplots)
-library(RColorBrewer)
 
 #########################################################
 ### reading in data and transform it to matrix format
@@ -17,12 +15,12 @@ rownames(mat_data) <- rnames                  # assign row names
 #########################################################
 
 # creates a own color palette from red to green
-my_palette <- colorRampPalette(c("red", "yellow", "green"))(n = 299)
+my_palette <- colorRampPalette(c("red", "yellow","green"))(n = 299)
 
 # (optional) defines the color breaks manually for a "skewed" color transition
-col_breaks = c(seq(-1,0,length=100),   # for red
-  seq(0.01,0.7,length=100),            # for yellow
-  seq(0.71,1,length=100))              # for green
+col_breaks = c(seq(0, 1,length=100),   # for red
+  seq(1.01,1.7,length=100),            # for yellow
+  seq(1.71,2,length=100))              # for green
 
 # creates a 5 x 5 inch image
 png("h1_simple.png",
@@ -31,7 +29,7 @@ png("h1_simple.png",
   res = 300,            # 300 pixels per inch
   pointsize = 8)        # smaller font size
 
-heatmap.2(mat_data,
+heatmap(mat_data,
   cellnote = mat_data,  # same data set for cell labels
   main = "Correlation", # heat map title
   notecol="black",      # change font color of cell labels to black
@@ -39,9 +37,9 @@ heatmap.2(mat_data,
   trace="none",         # turns off trace lines inside the heat map
   margins =c(12,9),     # widens margins around plot
   col=my_palette,       # use on color palette defined earlier
-  breaks=col_breaks,    # enable color transition at specified limits
+  #breaks=col_breaks,    # enable color transition at specified limits
   dendrogram="row",     # only draw a row dendrogram
-  Colv="NA")            # turn off column clustering
+  Colv= NA)            # turn off column clustering
 
 ##############################################################################
 # NOTE
